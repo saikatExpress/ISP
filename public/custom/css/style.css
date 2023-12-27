@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.login-btn {
+    padding: 25px 40px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: aqua;
+    color: darkmagenta;
+}
+
+.login-btn:hover {
+    background-color: #e0e0e0;
+}
