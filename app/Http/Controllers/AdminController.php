@@ -33,8 +33,18 @@ class AdminController extends Controller
         return view('auth.seller_login');
     }
 
+    public function sellerDashboard()
+    {
+        return view('seller.dashboard');
+    }
+
     public function customerLogin()
     {
         return view('auth.customer_login');
+    }
+
+    public function customerDashboard()
+    {
+        return view('customer.dashboard');
     }
 }

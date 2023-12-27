@@ -35,6 +35,50 @@ class AuthController extends Controller
         return redirect()->back()->with('message', 'Your credentials does not match!');
     }
 
+    public function customerLoginStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email'    => ['required'],
+            'password' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        if(Auth::attempt($credentials)){
+            return redirect()->intended('/customer/dashboard');
+        }
+
+        return redirect()->back()->with('message', 'Your credentials does not match!');
+    }
+
+    public function sellerLoginStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email'    => ['required'],
+            'password' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        if(Auth::attempt($credentials)){
+            return redirect()->intended('/seller/dashboard');
+        }
+
+        return redirect()->back()->with('message', 'Your credentials does not match!');
+    }
+
     public function logout()
     {
         Auth::logout();

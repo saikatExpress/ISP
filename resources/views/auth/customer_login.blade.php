@@ -39,7 +39,7 @@
                                         </div>
                                     @endif
 
-                                    <form method="POST" action="{{ route('admin.login') }}" class="needs-validation" novalidate="">
+                                    <form method="POST" action="{{ url('customer/store') }}" class="needs-validation" novalidate="">
                                         @csrf
                                         <div class="form-group">
                                             <label for="email">Email</label>
