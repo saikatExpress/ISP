@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-        <title>Otika - Admin Dashboard Template</title>
+        <title>ISP - Internet Service Provider | Admin Panel</title>
         <!-- General CSS Files -->
         <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
         <!-- Template CSS -->
@@ -215,7 +215,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="widget-chart.html">Designation List</a></li>
+                                    <li><a class="nav-link" href="{{ route('designation.list') }}">Designation List</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Employee List</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Daily Attendance</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Monthly Attendance</a></li>
@@ -447,6 +447,7 @@
         <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
         <!-- Page Specific JS File -->
         <script src="{{ asset('assets/js/page/index.js') }}"></script>
+        <script src="{{ asset('assets/js/page/advance-table.js') }}"></script>
         <!-- Template JS File -->
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
         <!-- Custom JS File -->
