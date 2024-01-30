@@ -80,7 +80,7 @@
     }
 
     .submit-btn:hover {
-      background-color: #b35100;
+      background-color: #0056b3;
     }
   </style>
 </head>
