@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Http\Requests\StoreDesignationRequest;
 use App\Http\Requests\UpdateDesignationRequest;
+use App\Models\Employees;
 
 class DesignationController extends Controller
 {
@@ -13,16 +14,34 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        return view('admin.designation.index');
+        $readdata=Designation::all();
+        return view('admin.designation.index',compact('readdata'));
     }
+
+ 
+
+    
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    // public function storing_employeelist(StoreDesignationRequest $request){
+    //     //dd($request);
+    //     $data1 = $request->validate([
+    //         'name' => 'required',
+    //         'depertment' => 'required',
+    //         'position'=>'required',
+    //         'salary'=>'required',
+    //         'hire_data'=>'required',
+    //         'status'=>'required'
+
+    //     ]);
+
+    //     $newt = Employees::create($data1);
+
+    //     return redirect(route('go.employeelist'));
+
+    // }
 
     /**
      * Store a newly created resource in storage.

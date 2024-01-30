@@ -73,11 +73,6 @@
 
         }
 
-        #actios_btn {
-            display: flex;
-            align-items: center;
-        }
-
         #actios_btn button{
 
             display: inline-block;
@@ -97,6 +92,11 @@
         #actios_btn button:hover {
 			background: #2300be;
         }
+
+        #actios_btn {
+            display: flex;
+            align-items: center;
+        }
 </style>
 <body>
     @extends('layout.adminmaster')
@@ -108,11 +108,11 @@
         <div class="card">
 
             <div class="card-header">
-                <h4>Designation List</h4>
+                <h4>Employee List</h4>
                 <h1 style="padding-left: 40px"> </h1>
                 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Add Designation
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addemployeeModal">
+                    Add Employee
                   </button>
 
 
@@ -127,7 +127,9 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Depertment</th>
-                            <th>Created At</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                            <th>Hire Data</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -137,12 +139,18 @@
                 <td style="font-size: 15px">{{ $data->id }}</td>
                 <td style="font-size: 15px">{{ $data->name }}</td>
                 <td style="font-size: 15px">{{ $data->depertment }}</td>
-                <td style="font-size: 15px, color=white">{{ $data->created_at->format('Y-m-d') }}</td>
+                <td style="font-size: 15px">{{ $data->position }}</td>
+                <td style="font-size: 15px">{{ $data->salary }}</td>
+                <td style="font-size: 15px">{{ $data->hire_data }}</td>
+
                 <td class="{{ $data->status == 'active' ? 'active' : 'inactive' }}" style="font-size: 15px"><button>{{ $data->status }}</button></td>
                 <td id="actios_btn">
+                    <a href="{{route('go.viewemployeelist', $data->id)}}"> <button>View</button></a> 
+
+
+                    <a href="{{route('go.editemployeelist', $data->id)}}"> <button>Edit</button></a> 
                     
-                    <a href="{{route('go.editdesignation', $data->id)}}"> <button>Edit</button></a> 
-                    <form method="POST" action="{{route('go.deletedesignation')}}">
+                    <form method="POST" action="{{route('go.deleteemployeelist')}}">
                         @method('DELETE')
                         @csrf
                   
@@ -150,6 +158,8 @@
                         <button style="background: #b61e1e">Delete</button>
 
                     </form> 
+
+
                 </td>
                 
             </tr>
@@ -183,8 +193,8 @@
 @endsection
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- addemployeeModal -->
+<div class="modal fade" id="addemployeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -206,7 +216,7 @@
 
 
             <div class="form-container">
-                <form  method="post" action="{{route('go_storedesignation')}}">
+                <form  method="post" action="{{route('go.storeemployeelist')}}">
                     @csrf 
                     @method('post')
                     <div>
@@ -217,6 +227,21 @@
                         <label>Depertment</label>
                         <input type="text" name="depertment" placeholder="depertment" />
                     </div>
+
+                    <div>
+                        <label>Position</label>
+                        <input type="text" name="position" placeholder="position" />
+                    </div>
+
+                    <div>
+                        <label>Salary</label>
+                        <input type="text" name="salary" placeholder="salary" />
+                    </div>
+                    <div>
+                        <label>Hire Data</label>
+                        <input type="text" name="hire_data" placeholder="hire date" />
+                    </div>
+                    
             
                     <div>
                         <label for="status">Status:</label>
@@ -231,6 +256,85 @@
                         <input type="submit" value="Add a New Designation" />
                     </div>
                 </form>
+                
+            </div>
+            
+            
+            
+            
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Designation</h5>
+          <h1>dfjfhjs</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+            <div>
+                @if($errors->any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                @endif
+            </div>    
+
+
+            {{-- <div class="form-container">
+                <form  method="post" action="{{route('go.storeemployeelist')}}">
+                    @csrf 
+                    @method('post')
+                    <input type="text" name='pass_id' hidden value="{{$pass->id}}">
+
+                    <div>
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="Name" value="{{$pass->name}}"/>
+                    </div>
+                    <div>
+                        <label>Depertment</label>
+                        <input type="text" name="depertment" placeholder="depertment" value="{{$pass->depertment}}"/>
+                    </div>
+
+                    <div>
+                        <label>Position</label>
+                        <input type="text" name="position" placeholder="position" value="{{$pass->position}}" />
+                    </div>
+
+                    <div>
+                        <label>Salary</label>
+                        <input type="text" name="salary" placeholder="salary" value="{{$pass->salary}}"/>
+                    </div>
+                    <div>
+                        <label>Hire Data</label>
+                        <input type="text" name="hire_data" placeholder="hire date" value="{{$pass->hire_data}}"/>
+                    </div>
+                    
+            
+                    <div>
+                        <label for="status">Status:</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="active" {{$pass->status == 'active' ? 'selected' : ''}}>Active</option>
+                            <option value="inactive" {{$pass->status == 'inactive' ? 'selected' : ''}}>Inactive</option>
+                        </select>
+                    </div>
+                    
+            
+                    <div>
+                        <input type="submit" value="Add a New Designation" />
+                    </div>
+                </form> --}}
                 
             </div>
             

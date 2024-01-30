@@ -25,7 +25,7 @@ class AuthController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)){

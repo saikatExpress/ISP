@@ -216,8 +216,8 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="{{ route('designation.list') }}">Designation List</a></li>
-                                    <li><a class="nav-link" href="widget-data.html">Employee List</a></li>
-                                    <li><a class="nav-link" href="widget-data.html">Daily Attendance</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.employeelist') }}">Employee List</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.dailyattendance') }}">Daily Attendance</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Monthly Attendance</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Loan Management</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Salary Sheet</a></li>
