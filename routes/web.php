@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 
-    Route::get('/r', [HumanresourcesController::class, 'r'])->name('go_r');
+    Route::get('/dashboard', [HumanresourcesController::class, 'dashboard_index'])->name('go.dashboard');
 
     
 
@@ -58,6 +58,20 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('/dailyattendance', [HumanresourcesController::class, 'dailyattendance'])->name('go.dailyattendance');
+    Route::get('/attendance', [HumanresourcesController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/store', [HumanresourcesController::class, 'store'])->name('attendance.store');
+
+
+
+    Route::get('/monthlyattendance', [HumanresourcesController::class, 'monthlyattendance'])->name('go.monthlyattendance');
+
+    Route::get('/attendancehistory', [HumanresourcesController::class, 'attendancehistory'])->name('go.attendancehistory');
+
+    Route::get('/searching', [HumanresourcesController::class, 'searching'])->name('g.searching');
+
+
+    Route::get('/loanmanagement', [HumanresourcesController::class, 'loanmanagement'])->name('go.loanmanagement');
+    
 
 
     

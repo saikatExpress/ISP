@@ -13,6 +13,7 @@ class Employees extends Model
         'name',
         'depertment',
         'position',
+        'loan',
         'salary',
         'hire_data',
         'status'

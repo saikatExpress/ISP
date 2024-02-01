@@ -218,8 +218,9 @@
                                     <li><a class="nav-link" href="{{ route('designation.list') }}">Designation List</a></li>
                                     <li><a class="nav-link" href="{{ route('go.employeelist') }}">Employee List</a></li>
                                     <li><a class="nav-link" href="{{ route('go.dailyattendance') }}">Daily Attendance</a></li>
-                                    <li><a class="nav-link" href="widget-data.html">Monthly Attendance</a></li>
-                                    <li><a class="nav-link" href="widget-data.html">Loan Management</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.monthlyattendance') }}">Monthly Attendance</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.attendancehistory') }}">Attendance History</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.loanmanagement') }}">Loan Management</a></li>
                                     <li><a class="nav-link" href="widget-data.html">Salary Sheet</a></li>
                                 </ul>
                             </li>

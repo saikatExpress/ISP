@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,10 +64,11 @@
 </head>
 
 <body>
+    
   <div class="container mt-3">
     <div class="row">
         <div class="col text-center">
-            <h1>Daily Attendance Sheet</h1>
+            <h1>Monthly Attendance Sheet</h1>
         </div>
     </div>
 </div>
@@ -76,8 +79,8 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead class="table-dark">
-                          <td colspan="{{ count($dates) + 3 }}">
-                            <button type="submit" class="btn btn-success">Submit Today Attendance</button>
+                          
+                            
                             <a href="{{route('go.dashboard')}}"><button type="button" class="new-btn">Go To Dashboard</button></a>
                           
                             <tr>
@@ -106,10 +109,9 @@
                                             @endphp
                                             <div class="form-check form-check-inline">
                                                 @if (!$checked)
-                                                    <input class="form-check-input" type="checkbox"
-                                                        name="attd[{{ $date }}][{{ $employee->name }}]" value="1" {{ $checked }}>
+                                                <i class="fa-solid fa-x" style="color: red; font-size: 20px;"></i>
                                                 @else
-                                                <i class="fa-solid fa-check" style="color: green; font-size: 20px;"></i>
+                                                <i class="fa-solid fa-check" style="color: green; font-size: 25px;"></i>
 
                                                 @endif
                                                 <input type="hidden" class="attendance-status" data-empid="{{ $employee->name }}" data-date="{{ $date }}" value="{{ $checked }}">
@@ -124,6 +126,11 @@
             </div>
         </div>
     </form>
+
+
+
+
+    
 
     <!-- Include Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -161,3 +168,7 @@
   
 </body>
 </html>
+
+
+
+

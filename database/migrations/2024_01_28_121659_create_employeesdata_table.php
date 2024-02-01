@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('depertment')->nullable();
             $table->string('position')->nullable();
-            $table->string('salary')->nullable();
+            $table->decimal('loan', 10, 2)->nullable();
+            $table->decimal('salary', 10, 2)->nullable();
             $table->string('hire_data')->nullable();
             $table->enum('status', ['active', 'inactive'])->nullable();
 

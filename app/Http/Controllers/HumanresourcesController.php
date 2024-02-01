@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Designation;
 use App\Models\Employees;
+use App\Models\Attend;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HumanresourcesController extends Controller
 {
+
+
+
+    public function dashboard_index()
+    {
+        return view('admin.dashboard');
+    }
 
    
 
@@ -143,8 +152,200 @@ class HumanresourcesController extends Controller
 
     public function dailyattendance()
     {
-        return view('humanresource.dailyattendance');
+        //compact purpose
+
+        //$results = Attend::where('emp_name', 'LIKE')->get();
+
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
+        
+        for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
+        }
+        
+        //return view('testdash', compact('employees', 'dates','results'));
+
+
+        //
+
+
+        //return view('testdash', compact('employees', 'dates','results'));
+
+        //return view('humanresource.dailyattendance');
+
+        return view('humanresource.dailyattendance', compact('employees', 'dates'));
+
     }
+
+
+
+    public function index()
+    {
+        ///this come form  searching for compact
+    
+        //$results = Attend::where('emp_name', 'LIKE')->get();
+    
+    
+        ///
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
+        
+        for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
+        }
+        
+        //return view('testdash', compact('employees', 'dates','results'));
+
+        return view('humanresource.dailyattendance', compact('employees', 'dates'));
+    }
+
+
+    public function store(Request $request)
+    {
+        
+        foreach ($request->attd as $date => $attendance) {
+            foreach ($attendance as $employeeId => $value) {
+                $existingAttendance = Attend::where('emp_name', $employeeId)
+                    ->where('attendance_date', $date)
+                    ->first();
+
+                if ($existingAttendance) {
+                    $existingAttendance->update(['status' => $value]);
+                } else {
+                    Attend::create([
+                        'emp_name' => $employeeId,
+                        'attendance_date' => $date,
+                        'status' => $value
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('attendance.index')->with('success', 'Attendance and leave data saved successfully.');
+    }
+
+
+
+
+    public function monthlyattendance()
+    {
+        //compact purpose
+
+        //$results = Attend::where('emp_name', 'LIKE')->get();
+
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
+        
+        for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
+        }
+
+      
+        //return view('testdash', compact('employees', 'dates','results'));
+
+
+        //
+
+
+        //return view('testdash', compact('employees', 'dates','results'));
+
+        //return view('humanresource.dailyattendance');
+
+       
+        return view('humanresource.monthlyattendance', compact('employees', 'dates'));
+
+    }
+
+
+    public function attendancehistory()
+    {
+        //compact purpose
+
+        $results = Attend::where('emp_name', 'LIKE')->get();
+
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
+        
+        for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
+
+
+        }
+        
+        $query = [];
+        //return view('testdash', compact('employees', 'dates','results'));
+
+
+        //
+
+
+        return view('humanresource.attendancehistory', compact('employees', 'dates','results','query'));
+
+        //return view('humanresource.dailyattendance');
+
+        
+    }
+
+
+
+    public function searching(Request $request)
+    {
+        ///this
+        $employees = Employees::all();
+        $today = Carbon::today();
+
+        $dates=[];
+        for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
+        }
+
+        //this line only use for compact
+
+
+
+        $query = $request->input('query');
+        $results = Attend::where('emp_name', 'LIKE', '%' . $query . '%')->get(); // Replace column_name with the column you want to search
+        
+        return view('humanresource.attendancehistory', compact('employees','dates','results','query'));
+
+    }
+
+
+
+
+    public function loanmanagement(){
+        return view('humanresource.loanmanagement');
+    }
+
+    public function storing_loan(Request $request){
+        //return $request->all();
+        $data1 = $request->validate([
+            
+            'salary'=>'required',
+           
+
+        ]);
+
+
+         $newt = Employees::create($data1);
+
+        //DB::table('employeesdata')->insert($data1);
+
+        if($newt){
+            return redirect()->back();
+        }
+        
+        
+
+        
+
+    }
+
+
 
   
 
