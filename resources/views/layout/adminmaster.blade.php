@@ -223,6 +223,15 @@
                                     <li><a class="nav-link" href="{{ route('go.loanmanagement') }}">Loan Management</a></li>
                                     <li><a class="nav-link" href="{{ route('go.salarymanagement') }}">Salary Sheet</a></li>
                                 </ul>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{ route('designation.list') }}">Designation List</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.employeelist') }}">Employee List</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.dailyattendance') }}">Daily Attendance</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.monthlyattendance') }}">Monthly Attendance</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.attendancehistory') }}">Attendance History</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.loanmanagement') }}">Loan Management</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.salarymanagement') }}">Salary Sheet</a></li>
+                                </ul>
                             </li>
 
                             <li class="dropdown">
