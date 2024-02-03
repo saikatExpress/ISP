@@ -71,8 +71,11 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('/loanmanagement', [HumanresourcesController::class, 'loanmanagement'])->name('go.loanmanagement');
-    
 
+    Route::get('/salarymanagement', [HumanresourcesController::class, 'salarymanagement'])->name('go.salarymanagement');
+    Route::get('/salaryattendance', [HumanresourcesController::class, 'salary_index'])->name('salaryattendance.index');
+    Route::post('/salaryattendance/store', [HumanresourcesController::class, 'salaryattendance_store'])->name('salaryattendance.store');
+    
 
     
 

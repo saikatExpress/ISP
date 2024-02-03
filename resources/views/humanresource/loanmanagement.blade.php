@@ -1,53 +1,40 @@
 @extends('layout.adminmaster')
 
 @section('content')
-<div class="container">
-  <h1 class="text-center">Employee Loan Management</h1>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-section">
-        <h2>Update Loan Amount</h2>
-        <form>
-          <div class="form-group">
-            <label for="employeeName">Employee Name</label>
-            <input type="text" class="form-control" id="employeeName" placeholder="Enter Employee Name">
-          </div>
-          
-          <div class="form-group">
-            <label for="updateLoanAmount">Update Loan Amount</label>
-            <input type="text" class="form-control" id="updateLoanAmount" placeholder="Enter Updated Loan Amount">
-          </div>
-          <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-      </div>
+<div class="card-body">
+    <h2 class="text-center mb-4">Loan Sheet</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="background-color: rgb(45, 255, 227)">Id</th>
+                    <th style="background-color: rgb(45, 255, 227)">Name</th>
+                    <th style="background-color: rgb(45, 255, 227)">Department</th>
+                    <th style="background-color: rgb(45, 255, 227)">Position</th>
+                    <th style="background-color: rgb(45, 255, 227)">Salary</th>
+                    <th style="background-color: rgb(45, 255, 227)">Loan</th>
+                    <th style="background-color: rgb(45, 255, 227)">Final Salary</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($reademployeeloan as $data)
+                <tr>
+                    <td>{{ $data->id }}</td>
+                    <td>{{ $data->name }}</td>
+                    <td>{{ $data->depertment }}</td>
+                    <td>{{ $data->position }}</td>
+                    <td>{{ $data->salary }}</td>
+                    
+                    <td style="background-color: rgb(255, 172, 172)">{{ $data->loan}}</td>
+                    
+                    <td style="background-color: rgb(128, 255, 156)">{{ $data->salary - $data->loan }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <div class="col-md-6">
-      <div class="form-section">
-        <h2>Add New Loan</h2>
-        <form>
-          <div class="form-group">
-            <label for="employeeName">Employee Name</label>
-            <input type="text" class="form-control" id="employeeName" placeholder="Enter Employee Name">
-          </div>
-        
-          <div class="form-group">
-            <label for="newLoanAmount">New Loan Amount</label>
-            <input type="text" class="form-control" id="newLoanAmount" placeholder="Enter New Loan Amount">
-          </div>
-          <div class="form-group">
-            <label for="loanType">Loan Type</label>
-            <select class="form-control" id="loanType">
-              <option>Select Loan Type</option>
-              <option>Personal Loan</option>
-              <option>Home Loan</option>
-              <option>Car Loan</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-success">Add Loan</button>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
 @endsection
+
+

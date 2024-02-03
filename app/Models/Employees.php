@@ -19,4 +19,9 @@ class Employees extends Model
         'status'
         
     ];
+
+    public function scopeWithLoan($query)
+    {
+        return $query->whereNotNull('loan')->where('loan', '>', 0);
+    }
 }

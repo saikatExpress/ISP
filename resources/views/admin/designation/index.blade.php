@@ -211,11 +211,11 @@
                     @method('post')
                     <div>
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Name" />
+                        <input type="text" name="name" placeholder="Name"  required />
                     </div>
                     <div>
                         <label>Depertment</label>
-                        <input type="text" name="depertment" placeholder="depertment" />
+                        <input type="text" name="depertment" placeholder="depertment"  required />
                     </div>
             
                     <div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Models\Employees;
 use App\Models\Attend;
+use App\Models\Salaryattendance;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -75,6 +76,7 @@ class HumanresourcesController extends Controller
     public function employeelist_index()
     {
         $readdata=Employees::all();
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
         return view('humanresource.employeelist',compact('readdata'));
     }
 
@@ -84,6 +86,7 @@ class HumanresourcesController extends Controller
             'name' => 'required',
             'depertment' => 'required',
             'position'=>'required',
+            'loan'=>'required',
             'salary'=>'required',
             'hire_data'=>'required',
             'status'=>'required'
@@ -110,6 +113,7 @@ class HumanresourcesController extends Controller
     {
         $readdata=Employees::all();
         // $pass=Employees::all();
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
         return view('humanresource.employeelist',compact('readdata'));
     }
 
@@ -131,6 +135,7 @@ class HumanresourcesController extends Controller
         $newdata->name= $request ->name;
         $newdata->depertment= $request ->depertment;
         $newdata->position= $request ->position;
+        $newdata->loan= $request ->loan;
         $newdata->salary= $request ->salary;
         $newdata->hire_data= $request ->hire_data;
         $newdata->status= $request ->status;
@@ -318,32 +323,74 @@ class HumanresourcesController extends Controller
 
 
     public function loanmanagement(){
-        return view('humanresource.loanmanagement');
+    
+        $reademployeeloan= Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('humanresource.loanmanagement', compact('reademployeeloan'));
     }
 
-    public function storing_loan(Request $request){
-        //return $request->all();
-        $data1 = $request->validate([
-            
-            'salary'=>'required',
-           
 
-        ]);
+    public function salarymanagement(){
+    
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
 
-
-         $newt = Employees::create($data1);
-
-        //DB::table('employeesdata')->insert($data1);
-
-        if($newt){
-            return redirect()->back();
+        for ($i = 1; $i <= 12; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $i, 1)->format('Y-m');
         }
         
-        
-
-        
-
+        return view('humanresource.salarymng', compact('employees', 'dates'));
     }
+
+
+    public function salary_index()
+    {
+        ///this come form  searching for compact
+    
+        //$results = Attend::where('emp_name', 'LIKE')->get();
+    
+    
+        ///
+        $employees = Employees::all();
+        $today = Carbon::today();
+        $dates = [];
+
+        for ($i = 1; $i <= 12; ++$i) {
+            $dates[] = Carbon::createFromDate($today->year, $i, 1)->format('Y-m');
+        }
+
+        
+        //return view('testdash', compact('employees', 'dates','results'));
+
+        return view('humanresource.salarymng', compact('employees', 'dates'));
+    }
+
+
+    public function salaryattendance_store(Request $request)
+    {
+        
+        foreach ($request->attd as $date => $attendance) {
+            foreach ($attendance as $employeeId => $value) {
+                $existingAttendance = Salaryattendance::where('emp_name', $employeeId)
+                    ->where('attendance_month', $date)
+                    ->first();
+
+                if ($existingAttendance) {
+                    $existingAttendance->update(['status' => $value]);
+                } else {
+                    Salaryattendance::create([
+                        'emp_name' => $employeeId,
+                        'attendance_month' => $date,
+                        'status' => $value
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('salaryattendance.index')->with('success', 'Attendance and leave data saved successfully.');
+    }
+
+    
 
 
 

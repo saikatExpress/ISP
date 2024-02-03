@@ -333,7 +333,7 @@
 
                 <footer class="main-footer">
                     <div class="footer-left">
-                        <a href="templateshub.net">TS WEB BUILD</a></a>
+                       
                     </div>
                     <div class="footer-right">
                     </div>

@@ -221,7 +221,7 @@
                                     <li><a class="nav-link" href="{{ route('go.monthlyattendance') }}">Monthly Attendance</a></li>
                                     <li><a class="nav-link" href="{{ route('go.attendancehistory') }}">Attendance History</a></li>
                                     <li><a class="nav-link" href="{{ route('go.loanmanagement') }}">Loan Management</a></li>
-                                    <li><a class="nav-link" href="widget-data.html">Salary Sheet</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.salarymanagement') }}">Salary Sheet</a></li>
                                 </ul>
                             </li>
 
@@ -435,7 +435,7 @@
 
                 <footer class="main-footer">
                     <div class="footer-left">
-                        <a href="templateshub.net">TS WEB BUILD</a></a>
+                        
                     </div>
                     <div class="footer-right">
                     </div>

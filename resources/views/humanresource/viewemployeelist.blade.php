@@ -77,6 +77,8 @@
                 <p>{{$pass->depertment}}</p>
                 <h3>Position:</h3>
                 <p>{{$pass->position}}</p>
+                <h3>Loan:</h3>
+                <p>{{$pass->loan}}</p>
                 <h3>Salary:</h3>
                 <p>{{$pass->salary}}</p>
                 <h3>Hire Date:</h3>

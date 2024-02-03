@@ -95,6 +95,11 @@
                     <label>Position</label>
                     <input type="text" name="position" placeholder="Position" value="{{$pass->position}}"/>
                 </div>
+
+                <div>
+                    <label>Loan</label>
+                    <input type="text" name="loan" placeholder="loan" value="{{$pass->loan}}"/>
+                </div>
                 <div>
                     <label>Salary</label>
                     <input type="text" name="salary" placeholder="Salary" value="{{$pass->salary}}"/>
