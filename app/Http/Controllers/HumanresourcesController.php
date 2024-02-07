@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Models\Employees;
 use App\Models\Attend;
+use App\Models\Package;
+use App\Models\Zone;
+use App\Models\Customerlist ;
 use App\Models\Salaryattendance;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HumanresourcesController extends Controller
@@ -389,6 +393,339 @@ class HumanresourcesController extends Controller
 
         return redirect()->route('salaryattendance.index')->with('success', 'Attendance and leave data saved successfully.');
     }
+
+
+
+
+    ///Reseller part
+
+    public function resellerprofile_index()
+
+
+    {
+
+        $id= Auth::id();
+        $name= auth()->user()->name;
+        return view('reseller.resellerprofile',compact('id','name'));
+    }
+   
+
+
+
+    ///
+    public function zone_index()
+
+
+    {
+
+        
+        $read=Zone::all();
+       
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('reseller.zone',compact('read'));
+    }
+
+    public function storing_zone(Request $request){
+        //return $request->all();
+        $data1 = $request->validate([
+            'zone_id' => 'required',
+            'zone_name' => 'required',
+            'zone_address'=>'required'
+        ]);
+
+
+         $newt = Zone::create($data1);
+
+        //DB::table('employeesdata')->insert($data1);
+
+        if($newt){
+            return redirect()->back();
+        }
+        
+        
+
+        
+
+    }
+
+
+    public function readingzone()
+    {
+        $read=Zone::all();
+        // $pass=Employees::all();
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('reseller.zone',compact('read'));
+    }
+
+
+
+    public function editzone($data_id){
+        $pass=Zone::find($data_id);
+        return view('reseller.editzone',compact('pass'));
+        
+    }
+
+    public function editstorezone(Request $request){
+        $newdata=Zone::find($request->pass_id);
+        $newdata->zone_id= $request ->zone_id;
+        $newdata->zone_name= $request ->zone_name;
+        $newdata->zone_address= $request ->zone_address;
+        
+        
+        $newdata->save();
+        return redirect(route('go.zonelist'));
+
+
+
+    }
+
+
+    public function deletezone(Request $request){
+        $new=Zone::find($request->passing_id);
+        $new->delete();
+        return redirect(route('go.zonelist'));
+
+    }
+
+
+    public function zone_search(Request $request)
+    {
+        // Fetch all zones
+        $read = Zone::all();
+        
+        // Check if there's a search query
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            // Perform search
+            $read = Zone::where('zone_id', 'like', '%' . $search . '%')
+                         ->orWhere('zone_name', 'like', '%' . $search . '%')
+                         ->orWhere('zone_address', 'like', '%' . $search . '%')
+                         ->get();
+        }
+        
+        // Pass zones data to the view
+        return view('reseller.zone', compact('read'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //
+
+    public function packages_index()
+
+
+    {
+
+        //return Auth::id();
+        //return auth()->user()->name;
+        $read=Package::all();
+       
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('reseller.package',compact('read'));
+    }
+
+    public function storing_packages(Request $request){
+        //return $request->all();
+        $data1 = $request->validate([
+            'name' => 'required',
+            'speed' => 'required',
+            'buy_price'=>'required',
+            'sale_price'=>'required'
+        ]);
+
+
+         $newt = Package::create($data1);
+
+        //DB::table('employeesdata')->insert($data1);
+
+        if($newt){
+            return redirect()->back();
+        }
+        
+        
+
+        
+
+    }
+
+
+    public function readingpackages()
+    {
+        $read=Package::all();
+        // $pass=Employees::all();
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('reseller.package',compact('read'));
+    }
+
+
+
+    public function editpackages($data_id){
+        $pass=Package::find($data_id);
+        return view('reseller.editpackage',compact('pass'));
+        
+    }
+
+    public function editstorepackages(Request $request){
+        $newdata=Package::find($request->pass_id);
+        $newdata->name= $request ->name;
+        $newdata->speed= $request ->speed;
+        $newdata->buy_price= $request ->buy_price;
+        $newdata->sale_price= $request ->sale_price;
+        
+        $newdata->save();
+        return redirect(route('go.packageslist'));
+
+
+
+    }
+
+
+    public function deletepackages(Request $request){
+        $new=Package::find($request->passing_id);
+        $new->delete();
+        return redirect(route('go.packageslist'));
+
+    }
+
+
+    public function getSalePrice($package)
+    {
+        $package = Package::where('name', $package)->first();
+        if ($package) {
+            return response()->json(['sale_price' => $package->sale_price]);
+        } else {
+            return response()->json(['error' => 'Package not found'], 404);
+        }
+    }
+
+    //
+    //
+    ///
+    ///
+    ///
+    ///
+    //
+    //
+    ///
+    ///
+    ///
+    ///
+    public function customer_index()
+    {
+        $readzone=Zone::all();
+        $readpackage=Package::all();
+        $read=Customerlist::all();
+        return view('reseller.customerlist',compact('read','readpackage','readzone'));
+    }
+
+
+    public function storing_customer(Request $request){
+        //return $request->all();
+        $data1 = $request->validate([
+            'username' => 'required',
+            'zone' => 'required',
+            'package'=>'required',
+            'sale_price' => 'required',
+            'mobile' => 'required',
+            'zone'=>'required',
+            'expire_Date' => 'required',
+            'pay_status'=>'required'
+
+        ]);
+
+
+         $newt = Customerlist::create($data1);
+
+        //DB::table('employeesdata')->insert($data1);
+
+        if($newt){
+            return redirect()->back();
+        }
+        
+        
+
+        
+
+    }
+
+
+    public function readingcustomer()
+    {
+        $read=Customerlist::all();
+        // $pass=Employees::all();
+        //$readdata = Employees::whereNotNull('loan')->where('loan', '>', 0)->get();
+        return view('reseller.customerlist',compact('read'));
+    }
+
+
+
+    public function editcustomer($data_id){
+        $pass=Customerlist::find($data_id);
+        return view('reseller.editcustomerlist',compact('pass'));
+        
+    }
+
+    public function editstorecustomer(Request $request){
+        $newdata=Customerlist::find($request->pass_id);
+        $newdata->username= $request ->username;
+        $newdata->zone= $request ->zone;
+        $newdata->package= $request ->package;
+        $newdata->sale_price= $request ->sale_price;
+        $newdata->mobile= $request ->mobile;
+        $newdata->expire_Date= $request ->expire_Date;
+        $newdata->pay_status= $request ->pay_status;
+        
+        
+        $newdata->save();
+        return redirect(route('go.customerlist'));
+
+
+
+    }
+
+
+    public function deletecustomer(Request $request){
+        $new=Customerlist::find($request->passing_id);
+        $new->delete();
+        return redirect(route('go.customerlist'));
+
+    }
+
+
+    public function customer_search(Request $request)
+    {
+        // compact purpose
+        $read = Customerlist::all();
+        $readzone=Zone::all();
+        $readpackage=Package::all();
+        //
+        
+        // Check if there's a search query
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            // Perform search
+            $read = Customerlist::where('username', 'like', '%' . $search . '%')
+                         ->orWhere('id', 'like', '%' . $search . '%')
+                         ->get();
+        }
+        
+        // Pass zones data to the view
+        return view('reseller.customerlist', compact('read','readzone','readpackage'));
+    }
+
+
+
+
+
+
 
     
 

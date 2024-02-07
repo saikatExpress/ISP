@@ -190,35 +190,54 @@
                             <li class="dropdown active">
                                 <a href="{{ url('/seller/dashboard') }}" class="nav-link">
                                     <i class="fas fa-solid fa-gauge"></i>
-                                    <span>Dashboard</span>
+                                    <span>Reseller Dashboard</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a class="nav-link" href="vector-map.html">
+                                <a class="nav-link" href="{{route('go.resellerprofile')}}">
                                     <i class="fa-solid fa-user"></i>
-                                    <span>Customer Profile</span>
+                                    <span>Reseller Profile</span>
                                 </a>
                             </li>
 
+                            
+
                             <li>
-                                <a class="nav-link" href="vector-map.html">
+                                <a class="nav-link" href="{{route('go.zonelist')}}">
                                     <i class="fa-solid fa-money-bill"></i>
-                                    <span>Customer Payment</span>
+                                    <span>Zones</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a class="nav-link" href="vector-map.html">
+                                <a class="nav-link" href="{{route('go.packageslist')}}">
                                     <i class="fa-solid fa-book"></i>
-                                    <span>Customer Ledger</span>
+                                    <span> Packages</span>
                                 </a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="menu-toggle nav-link has-dropdown">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span>Customer</span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{ route('go.customerlist') }}">Customer List</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.employeelist') }}">Online Customer</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.dailyattendance') }}">Offline Customer</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.monthlyattendance') }}">Expired Customer</a></li>
+                                    <li><a class="nav-link" href="{{ route('go.attendancehistory') }}">Customer Payments</a></li>
+                                    
+                                </ul>
+                                
                             </li>
 
                             <li>
                                 <a class="nav-link" href="vector-map.html">
                                     <i class="fa-solid fa-gears"></i>
-                                    <span>Support & Ticket</span>
+                                    <span>Transactions</span>
                                 </a>
                             </li>
                         </ul>
