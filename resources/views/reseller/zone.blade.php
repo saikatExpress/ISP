@@ -119,12 +119,14 @@
 
                 
 
-                  <div id="search" style="margin-left: 12px">
-                    <form method="GET" action="{{ route('search.zones') }}">
-                        <input type="text" name="search" placeholder="Search..." style="width: 180px; border-color:#0f0097; border-radius:8px;">
-                        <input type="submit" value="Search"class='btn btn-primary' style="background-color: #009c41">
-                    </form>
-                </div>
+                  {{-- <form id="searchForm" method="GET" action="{{ route('search.zones') }}">
+                    <select name="search" id="searchSelect" style="border-color:#0f0097; border-radius:8px; height: 38px;" onchange="this.form.submit()">
+                        <option value="11">Item 11</option>
+                        <option value="12">Item 12</option>
+                        <option value="13">Item 13</option>
+                    </select>
+                </form>
+                 --}}
 
 
                 

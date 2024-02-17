@@ -722,6 +722,31 @@ class HumanresourcesController extends Controller
     }
 
 
+    public function customerprofile_index()
+
+
+    {
+
+        $id= Auth::id();
+        $name= auth()->user()->name;
+        return view('customerprofile',compact('id','name'));
+    }
+
+    public function customerpay_index()
+
+
+    {
+
+        $id= Auth::id();
+        $name= auth()->user()->name;
+        $read = Customerlist::where('id', 'like', '%' . $id . '%')
+                         ->get();
+        // dd($read) ;                
+        return view('customerpay',compact('id','read','name'));
+    }
+
+
+
 
 
 

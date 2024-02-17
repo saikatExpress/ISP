@@ -150,7 +150,7 @@
                     <a href="{{route('go.viewemployeelist', $data->id)}}"> <button>View</button></a> 
 
 
-                    <a href="{{route('go.editemployeelist', $data->id)}}"> <button>Edit & Update Loan</button></a> 
+                    <a href="{{route('go.editemployeelist', $data->id)}}"> <button style="font-size: 9px">Edit & Update Loan</button></a> 
                     
                     <form method="POST" action="{{route('go.deleteemployeelist')}}">
                         @method('DELETE')

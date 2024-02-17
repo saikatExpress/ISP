@@ -110,7 +110,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/customers', [HumanresourcesController::class, 'customer_search'])->name('customers.index');
     Route::get('/customers/search', [HumanresourcesController::class, 'customer_search'])->name('search.customers');
 
-
+     ///customer part
+     Route::get('/customerprofile', [HumanresourcesController::class, 'customerprofile_index'])->name('go.customerprofile');
+     Route::get('/customerpay', [HumanresourcesController::class, 'customerpay_index'])->name('go.customerpay');
     
 
 
