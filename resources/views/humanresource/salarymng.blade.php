@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,28 +64,36 @@
 </head>
 
 <body>
+   
   <div class="container mt-3">
     <div class="row">
         <div class="col text-center">
-            <h1>Daily Attendance Sheet</h1>
+            <h1>Yearly Salary Sheet</h1>
         </div>
     </div>
 </div>
-    <form action="{{ route('attendance.store') }}" method="post">
+    <form action="{{ route('salaryattendance.store') }}" method="post">
         @csrf
         <div class="card mt-5 mx-auto" style="max-width: 1500px; margin-top=200px;">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead class="table-dark">
-                          <td colspan="{{ count($dates) + 3 }}">
-                            <button type="submit" class="btn btn-success">Submit Today Attendance</button>
-                            <a href="{{route('go.dashboard')}}"><button type="button" class="new-btn">Go To Dashboard</button></a>
+                            <td colspan="5">
+                                <td colspan="{{ count($dates) + 3 }}">
+                                    <button type="submit" class="btn btn-success">Submit Salary</button>
+                                    <a href="{{route('go.dashboard')}}"><button type="button" class="new-btn">Go To Dashboard</button></a>
+                                  
+                            </td>
                           
                             <tr>
+                                <th>Employee ID</th>
                                 <th>Employee Name</th>
                                 <th>Employee Position</th>
-                                <th>Employee ID</th>
+                                <th>Loan</th>
+                                <th>Salary</th>
+                                <th>Final salary</th>
+                                
                                 @foreach ($dates as $date)
                                     <th>{{ $date }}</th>
                                 @endforeach
@@ -93,14 +103,18 @@
                           
                             @foreach ($employees as $employee)
                                 <tr>
+                                    <td>{{ $employee->id }}</td>
                                     <td>{{ $employee->name }}</td>
                                     <td>{{ $employee->position }}</td>
-                                    <td>{{ $employee->id }}</td>
+                                    <td>{{ $employee->loan }}</td>
+                                    <td>{{ $employee->salary }}</td>
+                                    <td>{{ $employee->salary - $employee->loan }}</td>
+                                    
                                     @foreach ($dates as $date)
                                         <td>
                                             @php
-                                                $attendance = \App\Models\Attend::where('emp_name', $employee->name)
-                                                    ->where('attendance_date', $date)
+                                                $attendance = \App\Models\Salaryattendance::where('emp_name', $employee->name)
+                                                    ->where('attendance_month', $date)
                                                     ->first();
                                                 $checked = $attendance && $attendance->status == 1 ? 'checked' : '';
                                             @endphp

@@ -13,9 +13,15 @@ class Employees extends Model
         'name',
         'depertment',
         'position',
+        'loan',
         'salary',
         'hire_data',
         'status'
         
     ];
+
+    public function scopeWithLoan($query)
+    {
+        return $query->whereNotNull('loan')->where('loan', '>', 0);
+    }
 }

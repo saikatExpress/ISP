@@ -128,6 +128,7 @@
                             <th>Name</th>
                             <th>Depertment</th>
                             <th>Position</th>
+                            <th>Loan</th>
                             <th>Salary</th>
                             <th>Hire Data</th>
                             <th>Status</th>
@@ -140,6 +141,7 @@
                 <td style="font-size: 15px">{{ $data->name }}</td>
                 <td style="font-size: 15px">{{ $data->depertment }}</td>
                 <td style="font-size: 15px">{{ $data->position }}</td>
+                <td style="font-size: 15px">{{ $data->loan ? $data->loan : 'No loan' }}</td>
                 <td style="font-size: 15px">{{ $data->salary }}</td>
                 <td style="font-size: 15px">{{ $data->hire_data }}</td>
 
@@ -148,7 +150,7 @@
                     <a href="{{route('go.viewemployeelist', $data->id)}}"> <button>View</button></a> 
 
 
-                    <a href="{{route('go.editemployeelist', $data->id)}}"> <button>Edit</button></a> 
+                    <a href="{{route('go.editemployeelist', $data->id)}}"> <button style="font-size: 9px">Edit & Update Loan</button></a> 
                     
                     <form method="POST" action="{{route('go.deleteemployeelist')}}">
                         @method('DELETE')
@@ -221,27 +223,34 @@
                     @method('post')
                     <div>
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Name" />
+                        <input type="text" name="name" placeholder="Name" required/>
                     </div>
                     <div>
                         <label>Depertment</label>
-                        <input type="text" name="depertment" placeholder="depertment" />
+                        <input type="text" name="depertment" placeholder="depertment" required/>
                     </div>
 
                     <div>
                         <label>Position</label>
-                        <input type="text" name="position" placeholder="position" />
+                        <input type="text" name="position" placeholder="position" required />
+                    </div>
+
+                    <div>
+                        <label for="loan">Loan</label>
+                        <input type="text" id="loan" name="loan" placeholder="if no loan give 0'" required />
                     </div>
 
                     <div>
                         <label>Salary</label>
-                        <input type="text" name="salary" placeholder="salary" />
+                        <input type="text" name="salary" placeholder="salary" required/>
                     </div>
                     <div>
                         <label>Hire Data</label>
-                        <input type="text" name="hire_data" placeholder="hire date" />
+                        <input type="text" name="hire_data" placeholder="hire date" required/>
                     </div>
                     
+
+                   
             
                     <div>
                         <label for="status">Status:</label>

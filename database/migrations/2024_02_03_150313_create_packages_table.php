@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employeesdata', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('depertment')->nullable();
-            $table->string('position')->nullable();
-            $table->decimal('loan', 10, 2)->nullable();
-            $table->decimal('salary', 10, 2)->nullable();
-            $table->string('hire_data')->nullable();
-            $table->enum('status', ['active', 'inactive'])->nullable();
+            $table->string('speed')->nullable();
+            $table->string('buy_price')->nullable();
+            $table->string('sale_price')->nullable();
 
             $table->timestamps();
         });
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employeesdata');
+        Schema::dropIfExists('packages');
     }
 };

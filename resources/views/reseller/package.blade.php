@@ -73,11 +73,6 @@
 
         }
 
-        #actios_btn {
-            display: flex;
-            align-items: center;
-        }
-
         #actios_btn button{
 
             display: inline-block;
@@ -97,9 +92,14 @@
         #actios_btn button:hover {
 			background: #2300be;
         }
+
+        #actios_btn {
+            display: flex;
+            align-items: center;
+        }
 </style>
 <body>
-    @extends('layout.adminmaster')
+    @extends('layout.sellermaster')
 
 @section('content')
     <div class="col-12 col-md-12 col-lg-12">
@@ -108,11 +108,11 @@
         <div class="card">
 
             <div class="card-header">
-                <h4>Designation List</h4>
+                <h4>Package List</h4>
                 <h1 style="padding-left: 40px"> </h1>
                 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Add Designation
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addemployeeModal">
+                    Add Package
                   </button>
 
 
@@ -124,25 +124,31 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-md">
                         <tr>
-                            <th>#</th>
+                            
                             <th>Name</th>
-                            <th>Depertment</th>
-                            <th>Created At</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Speed</th>
+                            <th>Buy Price</th>
+                            <th>Sale Price</th>
+                            <th>Actions</th>
                         </tr>
 
-                        @foreach($readdata as $data)
+                        @foreach($read as $data)
             <tr>
-                <td style="font-size: 15px">{{ $data->id }}</td>
+                
                 <td style="font-size: 15px">{{ $data->name }}</td>
-                <td style="font-size: 15px">{{ $data->depertment }}</td>
-                <td style="font-size: 15px, color=white">{{ $data->created_at->format('Y-m-d') }}</td>
-                <td class="{{ $data->status == 'active' ? 'active' : 'inactive' }}" style="font-size: 15px"><button>{{ $data->status }}</button></td>
+                <td style="font-size: 15px">{{ $data->speed }}</td>
+                <td style="font-size: 15px">{{ $data->buy_price }}</td>
+                <td style="font-size: 15px">{{ $data->sale_price }}</td>
+
+
+                
                 <td id="actios_btn">
                     
-                    <a href="{{route('go.editdesignation', $data->id)}}"> <button>Edit</button></a> 
-                    <form method="POST" action="{{route('go.deletedesignation')}}">
+
+
+                    <a href="{{route('go.editpackages', $data->id)}}"> <button>Edit</button></a> 
+                    
+                    <form method="POST" action="{{route('go.deletepackages')}}">
                         @method('DELETE')
                         @csrf
                   
@@ -150,6 +156,8 @@
                         <button style="background: #b61e1e">Delete</button>
 
                     </form> 
+
+
                 </td>
                 
             </tr>
@@ -183,8 +191,8 @@
 @endsection
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- addemployeeModal -->
+<div class="modal fade" id="addemployeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -206,29 +214,31 @@
 
 
             <div class="form-container">
-                <form  method="post" action="{{route('go_storedesignation')}}">
+                <form  method="post" action="{{route('go.storepackages')}}">
                     @csrf 
                     @method('post')
                     <div>
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Name"  required />
+                        <input type="text" name="name" placeholder="Name" required/>
                     </div>
                     <div>
-                        <label>Depertment</label>
-                        <input type="text" name="depertment" placeholder="depertment"  required />
+                        <label>Speed</label>
+                        <input type="text" name="speed" placeholder="speed" required/>
                     </div>
-            
+
                     <div>
-                        <label for="status">Status:</label>
-                        <select class="form-control" id="status" name="status"> <!-- Add name attribute here -->
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
+                        <label>Buy Price</label>
+                        <input type="text" name="buy_price" placeholder="buy price" required />
+                    </div>
+
+                    <div>
+                        <label for="Sale Price">Sale Price</label>
+                        <input type="text" id="sale_price" name="sale_price" placeholder="sale price" required />
                     </div>
                     
             
                     <div>
-                        <input type="submit" value="Add a New Designation" />
+                        <input type="submit" value="Add a New package" />
                     </div>
                 </form>
                 
@@ -240,7 +250,11 @@
         </div>
       </div>
     </div>
-  </div>
+
+
+
+
+    
   
   <!-- Bootstrap JavaScript -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

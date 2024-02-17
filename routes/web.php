@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function(){
 
 
 
-    Route::get('/r', [HumanresourcesController::class, 'r'])->name('go_r');
+    Route::get('/dashboard', [HumanresourcesController::class, 'dashboard_index'])->name('go.dashboard');
 
     
 
@@ -58,8 +58,61 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('/dailyattendance', [HumanresourcesController::class, 'dailyattendance'])->name('go.dailyattendance');
+    Route::get('/attendance', [HumanresourcesController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/store', [HumanresourcesController::class, 'store'])->name('attendance.store');
 
 
+
+    Route::get('/monthlyattendance', [HumanresourcesController::class, 'monthlyattendance'])->name('go.monthlyattendance');
+
+    Route::get('/attendancehistory', [HumanresourcesController::class, 'attendancehistory'])->name('go.attendancehistory');
+
+    Route::get('/searching', [HumanresourcesController::class, 'searching'])->name('g.searching');
+
+
+    Route::get('/loanmanagement', [HumanresourcesController::class, 'loanmanagement'])->name('go.loanmanagement');
+
+    Route::get('/salarymanagement', [HumanresourcesController::class, 'salarymanagement'])->name('go.salarymanagement');
+    Route::get('/salaryattendance', [HumanresourcesController::class, 'salary_index'])->name('salaryattendance.index');
+    Route::post('/salaryattendance/store', [HumanresourcesController::class, 'salaryattendance_store'])->name('salaryattendance.store');
+
+
+
+    ///Reseller part
+    Route::get('/resellerprofile', [HumanresourcesController::class, 'resellerprofile_index'])->name('go.resellerprofile');
+   
+
+    Route::get('/packageslist', [HumanresourcesController::class, 'packages_index'])->name('go.packageslist');
+    Route::post('/storepackages', [HumanresourcesController::class, 'storing_packages'])->name('go.storepackages');
+    Route::get('/readpackages', [HumanresourcesController::class, 'readingpackages'])->name('go.readpackages');
+    Route::get('editpackages/{data_id} ', [HumanresourcesController::class, 'editpackages'])->name('go.editpackages');
+    Route::post('editpackages', [HumanresourcesController::class, 'editstorepackages'])->name('go.editstorepackages');
+    Route::delete('deletepackages', [HumanresourcesController::class, 'deletepackages'])->name('go.deletepackages');
+    Route::get('/get-sale-price/{package}', [HumanresourcesController::class, 'getSalePrice']);
+    
+
+    Route::get('/zonelist', [HumanresourcesController::class, 'zone_index'])->name('go.zonelist');
+    Route::post('/storezone', [HumanresourcesController::class, 'storing_zone'])->name('go.storezone');
+    Route::get('/readzone', [HumanresourcesController::class, 'readingzone'])->name('go.readzone');
+    Route::get('editzone/{data_id} ', [HumanresourcesController::class, 'editzone'])->name('go.editzone');
+    Route::post('editzone', [HumanresourcesController::class, 'editstorezone'])->name('go.editstorezone');
+    Route::delete('deletezone', [HumanresourcesController::class, 'deletezone'])->name('go.deletezone');
+    Route::get('/zones', [HumanresourcesController::class, 'zone_search'])->name('zones.index');
+    Route::get('/zones/search', [HumanresourcesController::class, 'zone_search'])->name('search.zones');
+
+
+    Route::get('/customerlist', [HumanresourcesController::class, 'customer_index'])->name('go.customerlist');
+    Route::post('/storecustomer', [HumanresourcesController::class, 'storing_customer'])->name('go.storecustomer');
+    Route::get('/readcustomer', [HumanresourcesController::class, 'readingcustomer'])->name('go.readcustomer');
+    Route::get('editcustomer/{data_id} ', [HumanresourcesController::class, 'editcustomer'])->name('go.editcustomer');
+    Route::post('editcustomer', [HumanresourcesController::class, 'editstorecustomer'])->name('go.editstorecustomer');
+    Route::delete('deletecustomer', [HumanresourcesController::class, 'deletecustomer'])->name('go.deletecustomer');
+    Route::get('/customers', [HumanresourcesController::class, 'customer_search'])->name('customers.index');
+    Route::get('/customers/search', [HumanresourcesController::class, 'customer_search'])->name('search.customers');
+
+     ///customer part
+     Route::get('/customerprofile', [HumanresourcesController::class, 'customerprofile_index'])->name('go.customerprofile');
+     Route::get('/customerpay', [HumanresourcesController::class, 'customerpay_index'])->name('go.customerpay');
     
 
 

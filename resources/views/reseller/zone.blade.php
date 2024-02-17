@@ -73,11 +73,6 @@
 
         }
 
-        #actios_btn {
-            display: flex;
-            align-items: center;
-        }
-
         #actios_btn button{
 
             display: inline-block;
@@ -97,9 +92,16 @@
         #actios_btn button:hover {
 			background: #2300be;
         }
+
+        #actios_btn {
+            display: flex;
+            align-items: center;
+        }
+        
+        
 </style>
 <body>
-    @extends('layout.adminmaster')
+    @extends('layout.sellermaster')
 
 @section('content')
     <div class="col-12 col-md-12 col-lg-12">
@@ -108,12 +110,23 @@
         <div class="card">
 
             <div class="card-header">
-                <h4>Designation List</h4>
+                <h4>Zone List</h4>
                 <h1 style="padding-left: 40px"> </h1>
                 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Add Designation
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addemployeeModal">
+                    Add Zone
                   </button>
+
+                
+
+                  {{-- <form id="searchForm" method="GET" action="{{ route('search.zones') }}">
+                    <select name="search" id="searchSelect" style="border-color:#0f0097; border-radius:8px; height: 38px;" onchange="this.form.submit()">
+                        <option value="11">Item 11</option>
+                        <option value="12">Item 12</option>
+                        <option value="13">Item 13</option>
+                    </select>
+                </form>
+                 --}}
 
 
                 
@@ -124,36 +137,31 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-md">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Depertment</th>
-                            <th>Created At</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            
+                            <th>Zone Id</th>
+                            <th>Zone Name</th>
+                            <th>Zone Address</th>
+                            <th>Actions</th>
                         </tr>
+                        @foreach($read as $data)
+                        <tr>
+                            <td style="font-size: 15px">{{ $data->zone_id }}</td>
+                            <td style="font-size: 15px">{{ $data->zone_name }}</td>
+                            <td style="font-size: 15px">{{ $data->zone_address }}</td>
+                        
+                            <td id="actios_btn">
+                                <a href="{{route('go.editzone', $data->id)}}"> <button>Edit</button></a> 
+                                            
+                                <form method="POST" action="{{route('go.deletezone')}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="text" name="passing_id" value="{{$data->id}}" hidden>
+                                    <button style="background: #b61e1e">Delete</button>
+                                </form> 
+                            </td>
+                        </tr>
+                        @endforeach
 
-                        @foreach($readdata as $data)
-            <tr>
-                <td style="font-size: 15px">{{ $data->id }}</td>
-                <td style="font-size: 15px">{{ $data->name }}</td>
-                <td style="font-size: 15px">{{ $data->depertment }}</td>
-                <td style="font-size: 15px, color=white">{{ $data->created_at->format('Y-m-d') }}</td>
-                <td class="{{ $data->status == 'active' ? 'active' : 'inactive' }}" style="font-size: 15px"><button>{{ $data->status }}</button></td>
-                <td id="actios_btn">
-                    
-                    <a href="{{route('go.editdesignation', $data->id)}}"> <button>Edit</button></a> 
-                    <form method="POST" action="{{route('go.deletedesignation')}}">
-                        @method('DELETE')
-                        @csrf
-                  
-                        <input type="text" name="passing_id" value="{{$data->id}}" hidden>
-                        <button style="background: #b61e1e">Delete</button>
-
-                    </form> 
-                </td>
-                
-            </tr>
-            @endforeach
 
 
             
@@ -183,8 +191,8 @@
 @endsection
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- addemployeeModal -->
+<div class="modal fade" id="addemployeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -206,29 +214,28 @@
 
 
             <div class="form-container">
-                <form  method="post" action="{{route('go_storedesignation')}}">
+                <form  method="post" action="{{route('go.storezone')}}">
                     @csrf 
                     @method('post')
                     <div>
-                        <label>Name</label>
-                        <input type="text" name="name" placeholder="Name"  required />
+                        <label>Zone Id</label>
+                        <input type="text" name="zone_id" placeholder="Name" required/>
                     </div>
                     <div>
-                        <label>Depertment</label>
-                        <input type="text" name="depertment" placeholder="depertment"  required />
+                        <label>Zone Name</label>
+                        <input type="text" name="zone_name" placeholder="speed" required/>
                     </div>
-            
+
                     <div>
-                        <label for="status">Status:</label>
-                        <select class="form-control" id="status" name="status"> <!-- Add name attribute here -->
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
+                        <label>Zone Address</label>
+                        <input type="text" name="zone_address" placeholder="zone_address" required />
                     </div>
+
+
                     
             
                     <div>
-                        <input type="submit" value="Add a New Designation" />
+                        <input type="submit" value="Add a New Zone" />
                     </div>
                 </form>
                 
@@ -240,12 +247,17 @@
         </div>
       </div>
     </div>
-  </div>
+
+
+
+
+    
   
   <!-- Bootstrap JavaScript -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
   
 </body>
 </html>

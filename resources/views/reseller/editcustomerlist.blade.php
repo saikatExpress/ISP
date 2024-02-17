@@ -64,7 +64,7 @@
     }
 </style>
 <body>
-    @extends('layout.adminmaster')
+    @extends('layout.sellermaster')
     <div>
         @if($errors->any())
         <ul>
@@ -77,44 +77,48 @@
 
     <div class="edit">
         <div class="form-container">
-            <div><h3>Update Employee</h3></div>
-            <form method="post" action="{{route('go.editstoreemployeelist')}}">
+            <div><h3>Update Package</h3></div>
+            <form method="post" action="{{route('go.editstorecustomer')}}">
                 @csrf 
                 @method('post')
                 <input type="text" name='pass_id' hidden value="{{$pass->id}}">
 
                 <div>
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Name" value="{{$pass->name}}" />
+                    <label>username</label>
+                    <input type="text" name="username" placeholder="username" value="{{$pass->username}}" />
                 </div>
                 <div>
-                    <label>Department</label>
-                    <input type="text" name="depertment" placeholder="Department" value="{{$pass->depertment}}"/>
+                    <label>zone</label>
+                    <input type="text" name="zone" placeholder="zone" value="{{$pass->zone}}"/>
                 </div>
                 <div>
-                    <label>Position</label>
-                    <input type="text" name="position" placeholder="Position" value="{{$pass->position}}"/>
+                    <label>package</label>
+                    <input type="text" name="package" placeholder="package" value="{{$pass->package}}"/>
                 </div>
 
                 <div>
-                    <label>Loan</label>
-                    <input type="text" name="loan" placeholder="loan" value="{{$pass->loan}}"/>
+                    <label>sale price</label>
+                    <input type="text" name="sale_price" placeholder="sale_price" value="{{$pass->sale_price}}"/>
                 </div>
                 <div>
-                    <label>Salary</label>
-                    <input type="text" name="salary" placeholder="Salary" value="{{$pass->salary}}"/>
+                    <label>mobile</label>
+                    <input type="text" name="mobile" placeholder="mobile" value="{{$pass->mobile}}"/>
                 </div>
+
                 <div>
-                    <label>Hire Date</label>
-                    <input type="text" name="hire_data" placeholder="Hire Date" value="{{$pass->hire_data}}"/>
+                    <label>expire Date</label>
+                    <input type="text" name="expire_Date" placeholder="expire_Date" value="{{$pass->expire_Date}}"/>
                 </div>
+
+
                 <div>
-                    <label for="status">Status:</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="active" {{$pass->status == 'active' ? 'selected' : ''}}>Active</option>
-                        <option value="inactive" {{$pass->status == 'inactive' ? 'selected' : ''}}>Inactive</option>
+                    <label for="pay_status">Status:</label>
+                    <select class="form-control" id="pay_status" name="pay_status">
+                        <option value="Paid" {{$pass->status == 'Paid' ? 'selected' : 'Paid'}}>Paid</option>
+                        <option value="Unpaid" {{$pass->status == 'Unpaid' ? 'selected' : 'Unpaid'}}>Unpaid</option>
                     </select>
                 </div>
+
                 <div>
                     <input type="submit" value="Update" />
                 </div>

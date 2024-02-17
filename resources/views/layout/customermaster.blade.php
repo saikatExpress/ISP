@@ -195,14 +195,14 @@
                             </li>
 
                             <li>
-                                <a class="nav-link" href="vector-map.html">
+                                <a class="nav-link" href="{{route('go.customerprofile')}}">
                                     <i class="fa-solid fa-user"></i>
                                     <span>Customer Profile</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a class="nav-link" href="vector-map.html">
+                                <a class="nav-link" href="{{route('go.customerpay')}}">
                                     <i class="fa-solid fa-money-bill"></i>
                                     <span>Customer Payment</span>
                                 </a>
@@ -333,7 +333,7 @@
 
                 <footer class="main-footer">
                     <div class="footer-left">
-                        <a href="templateshub.net">TS WEB BUILD</a></a>
+                       
                     </div>
                     <div class="footer-right">
                     </div>

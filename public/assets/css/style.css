@@ -5,6 +5,19 @@
     height: 100vh;
   }
 
+  .table-row-color-1 {
+    background-color: #95f0b3; /* yellow */
+}
+
+.table-row-color-2 {
+    background-color: #95f0b3; /* green */
+}
+
+.table-header-color {
+  background-color: #5ba2ff; /* blue */
+  
+}
+
 
 
 
